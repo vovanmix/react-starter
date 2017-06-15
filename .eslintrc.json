@@ -1,0 +1,54 @@
+{
+  "extends": "airbnb",
+  "installedESLint": true,
+  "env": {
+    "browser": true,
+    "mocha": true
+  },
+  "plugins": [
+    "import"
+  ],
+  "rules": {
+    "max-lines": ["error", 300],
+    "no-multiple-empty-lines": ["error", {
+      "max": 1,
+      "maxBOF": 0,
+      "maxEOF": 1
+    }],
+    "max-nested-callbacks": ["error", 4],
+    "object-curly-newline": ["error", {
+      "multiline": true
+    }],
+    "max-len": ["error", 80],
+    "max-params": ["error", 4],
+    "indent": ["error", 2, {
+      "FunctionDeclaration": {
+        "parameters": "first"
+      },
+      "CallExpression": {
+        "arguments": "first"
+      },
+      "ArrayExpression": "first",
+      "MemberExpression": 1,
+      "SwitchCase": 1
+    }],
+    "comma-dangle": ["error", "never"],
+    "key-spacing": ["error", {
+      "beforeColon": false,
+      "afterColon": true,
+      "mode": "strict"
+    }],
+    "no-multi-spaces": ["error"],
+    "no-empty-function": ["error", {
+      "allow": ["constructors", "setters"]
+    }],
+    "complexity": ["error", 6],
+    "no-extra-boolean-cast": "off",
+    "no-mixed-operators": "off",
+    "import/prefer-default-export": "off",
+    "jsx-a11y/href-no-hash": "off",
+    "jsx-a11y/img-has-alt": "off",
+    "no-else-return": "off",
+    "import/no-extraneous-dependencies": "off"
+  }
+}

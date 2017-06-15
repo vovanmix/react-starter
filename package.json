@@ -1,0 +1,20 @@
+{
+  "name": "react-starter",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "engines": {
+    "node": "7.9.0",
+    "yarn": "0.23.2"
+  },
+  "scripts": {
+    "postinstall": "(cd ./development/frontend && yarn install)",
+    "test:frontend": "(cd ./development/frontend && yarn run test)",
+    "build:frontend": "(cd ./development/frontend && yarn run build --silent)",
+    "watch:frontend": "(cd ./development/frontend && yarn run watch)"
+  },
+  "cacheDirectories": [
+    "node_modules",
+    "development/frontend/node_modules"
+  ]
+}
