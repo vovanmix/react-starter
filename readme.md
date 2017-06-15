@@ -47,3 +47,24 @@ option to copy all images to dist:
 ```require.context('../images', true, /^.*/);```
 but basically we need to do it like this:
 ```import logoImage from '../../../images/logo.png';```
+## Swagger client generation
+### Setup
+You need to have swagger-codegen installed.
+```sh
+brew install swagger-codegen
+```
+Don't forget to install Java 7 or 8. You probably have 1.6. Export JAVA_HOME in order to use the supported Java version:
+```sh
+export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
+export PATH=${JAVA_HOME}/bin:$PATH
+```
+### Generation
+```sh
+swagger-codegen generate -i ./swagger.yaml -l javascript -o ./development/frontend/src/js/client --additional-properties usePromises=true
+```
+The generated code should be checked in to git as a regular code. But it should never be changed manually.
+```js
+var devClient = new ApiClient();
+devClient.basePath = 'http://localhost:8080';
+var devPetApi = new PetApi(devClient);
+```
