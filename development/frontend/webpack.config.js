@@ -79,7 +79,7 @@ module.exports = {
      },
      {
        test: /\.(jpg|png|eot|svg|ttf|woff(2)?)(\?v=\d+\.\d+\.\d+)?/,
-       loader: 'url-loader'
+       loader: 'file-loader?name=[path][name].[ext]'
      }
     ]
   },

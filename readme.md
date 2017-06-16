@@ -41,3 +41,9 @@ yarn build
 ```sh
 yarn test
 ```
+
+## Images
+option to copy all images to dist:
+```require.context('../images', true, /^.*/);```
+but basically we need to do it like this:
+```import logoImage from '../../../images/logo.png';```
