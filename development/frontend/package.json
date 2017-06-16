@@ -8,7 +8,8 @@
     "build:p": "NODE_ENV=production ./node_modules/.bin/webpack --config webpack.config.js --colors",
     "build": "rm -rf ./dist && NODE_ENV=production ./node_modules/.bin/webpack --config webpack.config.js --colors",
     "watch": "NODE_ENV=development ./node_modules/.bin/webpack-dev-server --content-base build/ --hot --inline --port 3001 --colors --history-api-fallback --open",
-    "coverage": "open ./coverage/html/index.html"
+    "coverage": "open ./coverage/html/index.html",
+    "mock": "pokemock ../../swagger.yaml -p 3001"
   },
   "dependencies": {
     "babel-cli": "^6.24.1",
@@ -45,6 +46,7 @@
     "eslint-config-airbnb": "^15.0.1",
     "eslint-plugin-import": "^2.3.0",
     "eslint-plugin-jsx-a11y": "^5.0.3",
-    "eslint-plugin-react": "^7.1.0"
+    "eslint-plugin-react": "^7.1.0",
+    "pokemock": "^1.2.0"
   }
 }
