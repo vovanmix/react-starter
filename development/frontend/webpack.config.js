@@ -12,7 +12,7 @@ const extractCSS = dev ?
 
 const extractCommons = new webpack.optimize.CommonsChunkPlugin({
   name: 'commons',
-  filename: 'commons.js'
+  filename: dev ? 'commons.js' : 'commons.[hash].min.js'
 });
 
 module.exports = {
