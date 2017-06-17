@@ -7,30 +7,43 @@ const cssnano = require('cssnano');
 
 const dev = process.env.NODE_ENV !== 'production';
 const extractCSS = dev ?
-  new ExtractTextPlugin('app.css') :
-  new ExtractTextPlugin('app.[hash].min.css');
+  new ExtractTextPlugin('[name].bundle.css') :
+  new ExtractTextPlugin('[name].bundle.[hash].min.css');
+
+const extractCommons = new webpack.optimize.CommonsChunkPlugin({
+  name: 'commons',
+  filename: 'commons.js'
+});
 
 module.exports = {
   devtool: dev ? 'inline-sourcemap' : false,
-  entry: [
-    `${__dirname}/src/styles/app.sass`,
-    `${__dirname}/src/js/bootstrap.jsx`
-  ],
+  entry: {
+    app: [
+      `${__dirname}/src/styles/app.less`,
+      `${__dirname}/src/js/bootstrap.jsx`
+    ],
+    head: [
+      `${__dirname}/src/styles/head.less`,
+      `${__dirname}/src/js/head.js`
+    ]
+  },
   output: dev ? {
     path: `${__dirname}/build`,
     publicPath: '/assets/',
-    filename: 'bundle.js'
+    filename: '[name].bundle.js'
   } : {
     path: `${__dirname}/dist`,
-    filename: 'bundle.[hash].min.js'
+    filename: '[name].bundle.[hash].min.js'
   },
   plugins: dev ?
   [
+      extractCommons,
+      extractCSS,
       new webpack.NoEmitOnErrorsPlugin(),
-      new webpack.HotModuleReplacementPlugin(),
-      extractCSS
+      new webpack.HotModuleReplacementPlugin()
   ]
   : [
+      extractCommons,
       extractCSS,
       new webpack.optimize.OccurrenceOrderPlugin(),
       new webpack.DefinePlugin({ 'process.env': { NODE_ENV: "'production'" } }),
@@ -58,31 +71,40 @@ module.exports = {
   ],
   module: {
     rules: [
-     {
-       test: /\.jsx?$/,
-       loaders: ['babel-loader'],
-       exclude: /node_modules/
-     },
-     {
-       test: /\.css$/,
-       use: extractCSS.extract({
-         fallback: 'style-loader',
-         use: ['css-loader?sourceMap']
-       })
-     },
-     {
-       test: /\.(less)$/,
-       use: extractCSS.extract({
-         fallback: 'style-loader',
-         use: ['css-loader?sourceMap', 'less-loader?sourceMap']
-       })
-     },
-     {
-       test: /\.(jpg|png|eot|svg|ttf|woff(2)?)(\?v=\d+\.\d+\.\d+)?/,
-       loader: 'file-loader?name=[path][name].[ext]'
-     }
+      {
+        test: /src\/js\/client\/.*\.js$/,
+        use: 'imports-loader?define=>false'
+      },
+      {
+        test: /\.jsx?$/,
+        loaders: ['babel-loader'],
+        exclude: /node_modules/
+      },
+      {
+        test: /\.css$/,
+        use: extractCSS.extract({
+          fallback: 'style-loader',
+          use: ['css-loader?sourceMap']
+        })
+      },
+      {
+        test: /\.(less)$/,
+        use: extractCSS.extract({
+          fallback: 'style-loader',
+          use: ['css-loader?sourceMap', 'less-loader?sourceMap']
+        })
+      },
+      {
+        test: /\.(eot|svg|ttf|woff(2)?)(\?v=\d+\.\d+\.\d+)?/,
+        loader: 'url-loader'
+      },
+      {
+        test: /\.(jpeg|jpg|png?)(\?v=\d+\.\d+\.\d+)?/,
+        loader: 'file-loader?name=[path][name].[ext]'
+      }
     ]
   },
+  node: { fs: 'empty' },
   resolve: {
     modules: ['node_modules'],
     extensions: ['.js', '.jsx']
