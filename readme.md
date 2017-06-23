@@ -8,7 +8,7 @@ brew install yarn --ignore-dependencies
 ### Frontend
 #### Install new packages
 Use only yarn. It helps avoid problems with different versions installed in different environments, is faster and has other benefits.
-1. Go to the app directory `cd ./development/frontent`
+1. Go to the app directory `cd ./development/frontend`
 2. Add a new package `yarn add pkg-name`
 2. Add a dev package (needed only in dev - like for linting and testing; packages needed for build are not dev) `yarn add --dev pkg-name`
 3. Remome package `yarn remove pkg-name`

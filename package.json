@@ -11,14 +11,14 @@
     "yarn": "0.23.2"
   },
   "scripts": {
-    "postinstall": "(cd ./development/frontent && yarn install)",
-    "test:frontent": "(cd ./development/frontent && yarn test)",
-    "build:frontent": "(cd ./development/frontent && yarn build --silent)",
-    "watch:frontent": "(cd ./development/frontent && yarn watch)",
-    "coverage": "(cd ./development/frontent && yarn coverage)"
+    "postinstall": "(cd ./development/frontend && yarn install)",
+    "test:frontend": "(cd ./development/frontend && yarn test)",
+    "build:frontend": "(cd ./development/frontend && yarn build --silent)",
+    "watch:frontend": "(cd ./development/frontend && yarn watch)",
+    "coverage": "(cd ./development/frontend && yarn coverage)"
   },
   "cacheDirectories": [
     "node_modules",
-    "development/frontent/node_modules"
+    "development/frontend/node_modules"
   ]
 }
