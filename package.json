@@ -1,20 +1,24 @@
 {
   "name": "react-starter",
+  "description": "",
+  "repository": "react-starter",
   "version": "1.0.0",
-  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {},
   "license": "MIT",
   "engines": {
     "node": "7.9.0",
     "yarn": "0.23.2"
   },
   "scripts": {
-    "postinstall": "(cd ./development/frontend && yarn install)",
-    "test:frontend": "(cd ./development/frontend && yarn run test)",
-    "build:frontend": "(cd ./development/frontend && yarn run build --silent)",
-    "watch:frontend": "(cd ./development/frontend && yarn run watch)"
+    "postinstall": "(cd ./development/frontent && yarn install)",
+    "test:frontent": "(cd ./development/frontent && yarn test)",
+    "build:frontent": "(cd ./development/frontent && yarn build --silent)",
+    "watch:frontent": "(cd ./development/frontent && yarn watch)",
+    "coverage": "(cd ./development/frontent && yarn coverage)"
   },
   "cacheDirectories": [
     "node_modules",
-    "development/frontend/node_modules"
+    "development/frontent/node_modules"
   ]
 }

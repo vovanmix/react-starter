@@ -37,8 +37,6 @@ module.exports = {
   },
   plugins: dev ?
   [
-      extractCommons,
-      extractCSS,
       new webpack.NoEmitOnErrorsPlugin(),
       new webpack.HotModuleReplacementPlugin()
   ]
@@ -80,15 +78,28 @@ module.exports = {
         loaders: ['babel-loader'],
         exclude: /node_modules/
       },
-      {
+      dev ? {
+        test: /\.css$/,
+        loaders: [
+         'style-loader',
+         'css-loader?sourceMap'
+        ]
+      } : {
         test: /\.css$/,
         use: extractCSS.extract({
           fallback: 'style-loader',
           use: ['css-loader?sourceMap']
         })
       },
-      {
-        test: /\.(less)$/,
+      dev ? {
+        test: /\.less$/,
+        loaders: [
+         'style-loader',
+         'css-loader?sourceMap',
+         'less-loader?sourceMap'
+        ]
+      } : {
+        test: /\.less$/,
         use: extractCSS.extract({
           fallback: 'style-loader',
           use: ['css-loader?sourceMap', 'less-loader?sourceMap']
