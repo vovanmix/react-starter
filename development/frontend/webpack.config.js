@@ -37,6 +37,8 @@ module.exports = {
   },
   plugins: dev ?
   [
+      extractCommons,
+      extractCSS,
       new webpack.NoEmitOnErrorsPlugin(),
       new webpack.HotModuleReplacementPlugin()
   ]
@@ -80,10 +82,10 @@ module.exports = {
       },
       dev ? {
         test: /\.css$/,
-        loaders: [
-         'style-loader',
-         'css-loader?sourceMap'
-        ]
+        use: ['css-hot-loader'].concat(extractCSS.extract({
+          fallback: 'style-loader',
+          use: ['css-loader?sourceMap']
+        }))
       } : {
         test: /\.css$/,
         use: extractCSS.extract({
@@ -93,11 +95,10 @@ module.exports = {
       },
       dev ? {
         test: /\.less$/,
-        loaders: [
-         'style-loader',
-         'css-loader?sourceMap',
-         'less-loader?sourceMap'
-        ]
+        use: ['css-hot-loader'].concat(extractCSS.extract({
+          fallback: 'style-loader',
+          use: ['css-loader?sourceMap', 'less-loader?sourceMap']
+        }))
       } : {
         test: /\.less$/,
         use: extractCSS.extract({
