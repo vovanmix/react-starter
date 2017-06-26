@@ -8,8 +8,13 @@ import Footer from './common/footer';
 import Home from './home/home';
 
 export default class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.api = new ApiService();
+  }
+
   getChildContext() {
-    return { api: new ApiService() };
+    return { api: this.api };
   }
 
   render() {
