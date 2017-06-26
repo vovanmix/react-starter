@@ -15,7 +15,7 @@ Use only yarn. It helps avoid problems with different versions installed in diff
 5. Install locally packages that were added to package.json remotely: `yarn install`. You can also run this command from the root directory of the project.
 
 Yarn will create yarn.lock file that should be checked in git.
-#### From root dir
+#### Commands from root dir
 1. Launch a dev server with watch for changes and hot reload. It will open the browser automatically.
 ```sh
 yarn watch:frontend
@@ -28,7 +28,7 @@ yarn build:frontend
 ```sh
 yarn test:frontend
 ```
-#### From ./development/frontend dir
+#### Commands from ./development/frontend dir
 1. Launch a dev server with watch for changes and hot reload. It will open the browser automatically.
 ```sh
 yarn watch
@@ -42,7 +42,12 @@ yarn build
 yarn test
 ```
 
-## Images
+#### Builds
+When building for production, files will be minified and will include unique hashes in their name. One hash per build. A manifest file will be created in `dist`, containing this hash.
+
+#### Images
+All images that were required in the js files using `import`, or referenced in css files, will be copied to `dist` by Webpack, preserving their names and directory structure.
+
 Use images like this:
 ```js
 import logoImage from '../../../images/logo.png';
@@ -52,8 +57,8 @@ There is an option to copy all images to `dist` with this webpack config:
 require.context('../images', true, /^.*/);
 ```
 
-## Swagger client generation
-### Setup
+#### Swagger client generation
+##### Setup
 You need to have swagger-codegen installed.
 ```sh
 brew install swagger-codegen
@@ -63,7 +68,7 @@ Don't forget to install Java 7 or 8. You probably have 1.6. Export JAVA_HOME in 
 export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
 export PATH=${JAVA_HOME}/bin:$PATH
 ```
-### Generation
+##### Generation
 ```sh
 yarn generate-client
 ```
