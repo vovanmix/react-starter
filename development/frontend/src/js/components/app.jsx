@@ -2,19 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Route } from 'react-router-dom';
 
-import { ApiClient, DefaultApi } from '../client/src/index';
+import ApiService from '../services/api-service';
 import Navbar from './common/navbar';
 import Footer from './common/footer';
 import Home from './home/home';
 
-const dev = process.env.NODE_ENV !== 'production';
-const base = dev ? 'http://localhost:8000' : '';
-
 export default class App extends React.Component {
   getChildContext() {
-    const devClient = new ApiClient();
-    devClient.basePath = `${base}/api`;
-    return { api: new DefaultApi(devClient) };
+    return { api: new ApiService() };
   }
 
   render() {
