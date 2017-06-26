@@ -15,7 +15,9 @@
     "test:frontend": "(cd ./development/frontend && yarn test)",
     "build:frontend": "(cd ./development/frontend && yarn build --silent)",
     "watch:frontend": "(cd ./development/frontend && yarn watch)",
-    "coverage": "(cd ./development/frontend && yarn coverage)"
+    "coverage": "(cd ./development/frontend && yarn coverage)",
+    "mock-server:frontend": "(cd ./development/frontend && yarn mock-server)",
+    "generate-client:frontend": "(cd ./development/frontend && yarn generate-client)"
   },
   "cacheDirectories": [
     "node_modules",

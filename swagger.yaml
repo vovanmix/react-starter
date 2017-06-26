@@ -1,0 +1,48 @@
+swagger: '2.0'
+info:
+  title: TODO
+  description: TODO
+  version: '1.0.0'
+host: /
+basePath: /api
+schemes:
+  - https
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+
+definitions:
+  Success:
+    type: object
+    properties:
+      success:
+        type: boolean
+        enum:
+          - true
+  Error:
+    type: object
+    properties:
+      success:
+        type: boolean
+        enum:
+          - false
+      message:
+        type: string
+  ValidationError:
+    type: object
+    properties:
+      success:
+        type: boolean
+        enum:
+          - false
+      message:
+        type: string
+      errors:
+        type: object
+        properties:
+          key:
+            type: string
+        additionalProperties:
+          type: string
