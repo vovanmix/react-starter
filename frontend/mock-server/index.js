@@ -9,7 +9,7 @@ const Resource = swagger.Resource;
 const app = express();
 const middleware = new Middleware(app);
 
-middleware.init(path.join(__dirname, '../../../swagger.yaml'), () => {
+middleware.init(path.join(__dirname, '../../swagger.yml'), () => {
   const myDB = new MemoryDataStore();
   myDB.save(
     new Resource('/api/pets/1', {
