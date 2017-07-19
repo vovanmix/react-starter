@@ -4,9 +4,9 @@ You need to have node >= 7 and yarn >= 0.23 installed globally in your system to
 nvm install 7.9
 brew install yarn --ignore-dependencies
 ```
-## Development
-### Frontend
-#### Install new packages
+# Development
+## Frontend
+### Install new packages
 Use only yarn. It helps avoid problems with different versions installed in different environments: it makes sure that on each of the developers computers and on CI all the packages have the same versions. Also it is faster and has other benefits.
 1. Go to the app directory `cd ./frontend`
 2. Add a new package: `yarn add pkg-name`
@@ -15,7 +15,7 @@ Use only yarn. It helps avoid problems with different versions installed in diff
 5. Install locally packages that were added to package.json remotely: `yarn install`. You can also run this command from the root directory of the project.
 
 Yarn will create yarn.lock file that should be checked in git.
-#### Commands from root dir
+### Commands from root dir
 1. Launch a dev server with watch for changes and hot reload. It will open the browser automatically.
 ```sh
 yarn watch:frontend
@@ -28,7 +28,7 @@ yarn build:frontend
 ```sh
 yarn test:frontend
 ```
-#### Commands from ./frontend dir
+### Commands from ./frontend dir
 1. Launch a dev server with watch for changes and hot reload. It will be available
 at `http://localhost:3001`
 ```sh
@@ -43,15 +43,15 @@ yarn build
 yarn test
 ```
 
-#### Bootstrap and font awesome
+### Bootstrap and font awesome
 Bootstrap and Font Awesome are already installed and included in the main less file.
 Icon fonts for Font Awesome are configured to be inserted into css files in base64 encoded form to save time on loading multiple files and make them available right away.
 
-#### HTML template
+### HTML template
 file `index.ejs` contains html that will be used for the index page for local dev. All the JS and CSS
 files are included there.
 
-##### Include keys and predefined variables in the html code
+#### Include keys and predefined variables in the html code
 Instead of creating a `<script>` tag and defining variables there, it's preferable to
 define meta tags, put values there, and then access this values in the code.
 
@@ -95,20 +95,20 @@ when running the script:
 STRIPE_PUBLIC_KEY=sdfdsfds yarn watch
 ```
 
-#### Initialization
+### Initialization
 App initializes with `bootstrap.jsx` being mounted. A good place to put initialization
 code and initial API calls to it's `constructor` and `componentDidMount` methods.
 
-#### Preloading
+### Preloading
 There is a separate code entry point called `head.js` and `head.less`. This code will
 be executed before react and all the libraries has been loaded. It's a good place
 to put a custom pre-loading script in vanilla js if necessary. If not needed, the
 references to these files can be removed from the html.
 
-#### Builds
+### Builds
 When building for production, files will be minified and will include unique hashes in their name. One hash per build. A manifest file will be created in `dist`, containing this hash.
 
-#### Images
+### Images
 All images that were required in the js files using `import`, or referenced in css files, will be copied to `dist` by Webpack, preserving their names and directory structure.
 
 Use images like this:
@@ -120,8 +120,8 @@ There is an option to copy all images to `dist` with this webpack config:
 require.context('../images', true, /^.*/);
 ```
 
-#### Swagger client generation
-##### Setup
+### Swagger client generation
+#### Setup
 You need to have swagger-codegen installed.
 ```sh
 brew install swagger-codegen
@@ -131,7 +131,7 @@ Don't forget to install Java 7 or 8. You probably have 1.6. Export JAVA_HOME in 
 export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
 export PATH=${JAVA_HOME}/bin:$PATH
 ```
-##### Generation
+#### Generation
 ```sh
 yarn generate-client
 ```
