@@ -9,12 +9,31 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 
 const dev = process.env.NODE_ENV !== 'production';
-const extractCSS = new ExtractTextPlugin('assets/[name].bundle.[hash].css');
+const postfix = dev ? '' : '.[hash].min';
+
+const extractCSS = new ExtractTextPlugin(`assets/[name].bundle${postfix}.css`);
 
 const extractCommons = new webpack.optimize.CommonsChunkPlugin({
   name: 'commons',
-  filename: 'assets/commons.[hash].js'
+  filename: `assets/commons${postfix}.js`
 });
+
+function setUpExtractCSS(loader) {
+  const useLoaders = ['css-loader?sourceMap'];
+  if (loader) {
+    useLoaders.push(loader);
+  }
+  const extract = extractCSS.extract({
+    fallback: 'style-loader',
+    use: useLoaders
+  });
+
+  if (dev) {
+    return ['css-hot-loader'].concat(extract);
+  } else {
+    return extract;
+  }
+}
 
 module.exports = {
   devtool: dev ? 'inline-sourcemap' : false,
@@ -30,14 +49,14 @@ module.exports = {
   },
   output: {
     path: `${__dirname}/dist`,
-    filename: 'assets/[name].bundle.[hash].js'
+    filename: `assets/[name].bundle${postfix}.js`
   },
   plugins: dev ?
   [
       extractCommons,
       extractCSS,
       new webpack.NoEmitOnErrorsPlugin(),
-      new webpack.HotModuleReplacementPlugin(),
+      new webpack.NamedModulesPlugin(),
       new HtmlWebpackPlugin({
         alwaysWriteToDisk: true,
         inject: false,
@@ -88,31 +107,13 @@ module.exports = {
         loaders: ['babel-loader'],
         exclude: /node_modules/
       },
-      dev ? {
+      {
         test: /\.css$/,
-        use: ['css-hot-loader'].concat(extractCSS.extract({
-          fallback: 'style-loader',
-          use: ['css-loader?sourceMap']
-        }))
-      } : {
-        test: /\.css$/,
-        use: extractCSS.extract({
-          fallback: 'style-loader',
-          use: ['css-loader?sourceMap']
-        })
+        use: setUpExtractCSS()
       },
-      dev ? {
+      {
         test: /\.less$/,
-        use: ['css-hot-loader'].concat(extractCSS.extract({
-          fallback: 'style-loader',
-          use: ['css-loader?sourceMap', 'less-loader?sourceMap']
-        }))
-      } : {
-        test: /\.less$/,
-        use: extractCSS.extract({
-          fallback: 'style-loader',
-          use: ['css-loader?sourceMap', 'less-loader?sourceMap']
-        })
+        use: setUpExtractCSS('less-loader?sourceMap')
       },
       {
         test: /\.(eot|svg|ttf|woff(2)?)(\?v=\d+\.\d+\.\d+)?/,
