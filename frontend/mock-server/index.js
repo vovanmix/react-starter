@@ -16,6 +16,26 @@ middleware.init(path.join(__dirname, '../../swagger.yml'), () => {
       id: 1,
       name: 'Lassie',
       tag: 'brown'
+    }),
+    new Resource('/api/pets/2', {
+      id: 2,
+      name: 'Clifford',
+      tag: 'red'
+    }),
+    new Resource('/api/pets/3', {
+      id: 3,
+      name: 'Garfield',
+      tag: 'orange'
+    }),
+    new Resource('/api/pets/4', {
+      id: 4,
+      name: 'Snoopy',
+      tag: 'black'
+    }),
+    new Resource('/api/pets/5', {
+      id: 5,
+      name: 'Hello Kitty',
+      tag: 'white'
     })
   );
 
