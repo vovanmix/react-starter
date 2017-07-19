@@ -18,7 +18,7 @@
     "coverage": "(cd ./frontend && yarn coverage)",
     "mock-server:frontend": "(cd ./frontend && yarn mock-server)",
     "generate-client:frontend": "(cd ./frontend && yarn generate-client)",
-    "generate-prop-types:frontend": "(cd ./frontend && yarn generate-prop-types)",
+    "generate-prop-types:frontend": "(cd ./frontend && yarn generate-prop-types)"
   },
   "cacheDirectories": [
     "node_modules",
