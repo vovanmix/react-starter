@@ -8,11 +8,11 @@ const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const dev = process.env.NODE_ENV !== 'production';
-const extractCSS = new ExtractTextPlugin('[name].bundle.[hash].css');
+const extractCSS = new ExtractTextPlugin('assets/[name].bundle.[hash].css');
 
 const extractCommons = new webpack.optimize.CommonsChunkPlugin({
   name: 'commons',
-  filename: 'commons.[hash].js'
+  filename: 'assets/commons.[hash].js'
 });
 
 module.exports = {
@@ -29,7 +29,7 @@ module.exports = {
   },
   output: {
     path: `${__dirname}/dist`,
-    filename: '[name].bundle.[hash].js'
+    filename: 'assets/[name].bundle.[hash].js'
   },
   plugins: dev ?
   [
