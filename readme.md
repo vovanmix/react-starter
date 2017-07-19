@@ -45,6 +45,7 @@ yarn test
 
 #### Bootstrap and font awesome
 Bootstrap and Font Awesome are already installed and included in the main less file.
+Icon fonts for Font Awesome are configured to be inserted into css files in base64 encoded form to save time on loading multiple files and make them available right away.
 
 #### HTML template
 file `index.ejs` contains html that will be used for the index page for local dev. All the JS and CSS
