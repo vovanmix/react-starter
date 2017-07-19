@@ -43,6 +43,14 @@ yarn build
 yarn test
 ```
 
+### Dev hot reloading
+When running `yarn watch`, after making any changes to js or css source files, changes will be automatically
+reflected in the opened browser window without page reload. That means that if you add
+a new background color to the css, it will appear in browser in a couple of seconds, and all previously
+entered data like filled in forms, opened popups, scroll, will be preserved.
+
+The same for JS, new code will come into the effect right away withoud loosing any data.
+
 ### Bootstrap and font awesome
 Bootstrap and Font Awesome are already installed and included in the main less file.
 Icon fonts for Font Awesome are configured to be inserted into css files in base64 encoded form to save time on loading multiple files and make them available right away.
@@ -121,6 +129,23 @@ require.context('../images', true, /^.*/);
 ```
 
 ### Swagger client generation
+We will use swagger file to generate a client library that will be used to communicate with the API.
+It will abstract all the details of this communication, like HTTP calls and passing parameters to them.
+The intermediate between the app and the library is `api-service`. It will be available to
+any component using `context`. Anything that should apply to all requests, like headers, should be applied in it.
+
+Please keep `src/js/definitions/services-prop-types.js` file up to date manually, with all the public
+methods of the client library listed there.
+
+Use it for prop types in components like
+```js
+import { ApiPropTypes } from '../../definitions/services-prop-types';
+Home.contextTypes = { api: ApiPropTypes };
+```
+
+One important thing to note is there are no `null` values in swagger. If the field has `null` value,
+it will not present in the HTTP response at all, but the client lib will still return it, and it's value
+will be `undefined`.
 #### Setup
 You need to have swagger-codegen installed.
 ```sh
@@ -140,3 +165,37 @@ or form the root of the project:
 yarn generate-client:frontend
 ```
 The generated code should be checked in to git as a regular code. But it should never be changed manually.
+
+### Swagger prop types generation
+Run `generate-prop-types` (from frontend) or `generate-prop-types:frontend` (from root) to generate prop types objects
+for React using swagger file.
+
+Use it for prop types in components like
+```js
+import { pet as petPropType } from '../../definitions/data-prop-types';
+PetsListItem.propTypes = { pet: petPropType.isRequired };
+```
+
+### Mock server
+Mocks server is a minimal Express server that can completely emulate backend, sending responses and accepting POST/PUT/DELETE.
+
+It uses swagger file to understand what endpoints exist and what is the response format.
+
+It can be configured with pre-populated mock values for responses. Like this:
+```js
+new Resource('/api/pets/2', {
+  id: 2,
+  name: 'Clifford',
+  tag: 'red'
+}),
+new Resource('/api/pets/3', {
+  id: 3,
+  name: 'Garfield',
+  tag: 'orange'
+}),
+```
+This values will be returned for both `/api/pets/3` and `/api/pets`. It is that much smart.
+
+For dev, you need to run both `yarn watch` and `yarn mock-server` (or `yarn mock-server:frontend` from root).
+By default the app is configured to listen for `localhost:8080` as an api server if the environment is not prod.
+CORS is already in place.
