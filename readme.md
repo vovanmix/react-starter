@@ -29,7 +29,8 @@ yarn build:frontend
 yarn test:frontend
 ```
 #### Commands from ./frontend dir
-1. Launch a dev server with watch for changes and hot reload. It will open the browser automatically.
+1. Launch a dev server with watch for changes and hot reload. It will be available
+at `http://localhost:3001`
 ```sh
 yarn watch
 ```
@@ -41,6 +42,9 @@ yarn build
 ```sh
 yarn test
 ```
+
+#### Bootstrap and font awesome
+Bootstrap and Font Awesome are already installed and included in the main less file.
 
 #### HTML template
 file `index.ejs` contains html that will be used for the index page for local dev. All the JS and CSS
