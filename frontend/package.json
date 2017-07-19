@@ -35,6 +35,7 @@
     "loader-utils": "^1.1.0",
     "moment": "^2.18.1",
     "optimize-css-assets-webpack-plugin": "^2.0.0",
+    "progress-bar-webpack-plugin": "^1.10.0",
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",

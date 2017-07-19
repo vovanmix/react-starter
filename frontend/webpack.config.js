@@ -6,6 +6,7 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const cssnano = require('cssnano');
 const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 
 const dev = process.env.NODE_ENV !== 'production';
 const extractCSS = new ExtractTextPlugin('assets/[name].bundle.[hash].css');
@@ -43,7 +44,8 @@ module.exports = {
         template: 'index.ejs',
         someCustomVariable: 'someCustomVariableValue'
       }),
-      new HtmlWebpackHarddiskPlugin()
+      new HtmlWebpackHarddiskPlugin(),
+      new ProgressBarPlugin()
   ]
   : [
       extractCommons,
