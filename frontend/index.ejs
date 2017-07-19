@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]>
+<html lang="en" class="ie6 ie" xmlns:og="http://ogp.me/ns#"><![endif]-->
+<!--[if IE 7 ]>
+<html lang="en" class="ie7 ie" xmlns:og="http://ogp.me/ns#"><![endif]-->
+<!--[if IE 8 ]>
+<html lang="en" class="ie8 ie" xmlns:og="http://ogp.me/ns#"><![endif]-->
+<!--[if IE 9 ]>
+<html lang="en" class="ie9 ie" xmlns:og="http://ogp.me/ns#"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html lang="en" xmlns:og="http://ogp.me/ns#">
+<!--<![endif]-->
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+
+  <!-- Site content -->
+  <title>Dev server</title>
+
+  <!-- VIEWPORT -->
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,minimum-scale=1,maximum-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+  <script src="<%= htmlWebpackPlugin.files.chunks.common.entry %>"></script>
+  <link rel="stylesheet" href="/<%= htmlWebpackPlugin.files.chunks.head.css %>" />
+  <link rel="stylesheet" href="/<%= htmlWebpackPlugin.files.chunks.app.css %>" media="none" onload="if(media!='all')media='all'" />
+</head>
+
+<body>
+  <script src="/<%= htmlWebpackPlugin.files.chunks.head.entry %>"></script>
+
+  <div id="container"></div>
+
+  <script async src="/<%= htmlWebpackPlugin.files.chunks.app.entry %>"></script>
+</body>
+
+</html>

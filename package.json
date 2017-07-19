@@ -11,16 +11,17 @@
     "yarn": "0.23.2"
   },
   "scripts": {
-    "postinstall": "(cd ./development/frontend && yarn install)",
-    "test:frontend": "(cd ./development/frontend && yarn test)",
-    "build:frontend": "(cd ./development/frontend && yarn build --silent)",
-    "watch:frontend": "(cd ./development/frontend && yarn watch)",
-    "coverage": "(cd ./development/frontend && yarn coverage)",
-    "mock-server:frontend": "(cd ./development/frontend && yarn mock-server)",
-    "generate-client:frontend": "(cd ./development/frontend && yarn generate-client)"
+    "postinstall": "(cd ./frontend && yarn install)",
+    "test:frontend": "(cd ./frontend && yarn test)",
+    "build:frontend": "(cd ./frontend && yarn build --silent)",
+    "watch:frontend": "(cd ./frontend && yarn watch)",
+    "coverage": "(cd ./frontend && yarn coverage)",
+    "mock-server:frontend": "(cd ./frontend && yarn mock-server)",
+    "generate-client:frontend": "(cd ./frontend && yarn generate-client)",
+    "generate-prop-types:frontend": "(cd ./frontend && yarn generate-prop-types)",
   },
   "cacheDirectories": [
     "node_modules",
-    "development/frontend/node_modules"
+    "frontend/node_modules"
   ]
 }

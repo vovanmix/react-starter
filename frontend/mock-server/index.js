@@ -27,7 +27,7 @@ middleware.init(path.join(__dirname, '../../../swagger.yaml'), () => {
     middleware.mock(myDB)
   );
 
-  app.listen(8000, () => {
-    console.log('The mock server is now running at http://localhost:8000');
+  app.listen(8080, () => {
+    console.log('The mock server is now running at http://localhost:8080');
   });
 });

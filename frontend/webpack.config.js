@@ -4,15 +4,15 @@ const webpack = require('webpack');
 const fs = require('fs');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const cssnano = require('cssnano');
+const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const dev = process.env.NODE_ENV !== 'production';
-const extractCSS = dev ?
-  new ExtractTextPlugin('[name].bundle.css') :
-  new ExtractTextPlugin('[name].bundle.[hash].min.css');
+const extractCSS = new ExtractTextPlugin('[name].bundle.[hash].css');
 
 const extractCommons = new webpack.optimize.CommonsChunkPlugin({
   name: 'commons',
-  filename: dev ? 'commons.js' : 'commons.[hash].min.js'
+  filename: 'commons.[hash].js'
 });
 
 module.exports = {
@@ -27,20 +27,23 @@ module.exports = {
       `${__dirname}/src/js/head.js`
     ]
   },
-  output: dev ? {
-    path: `${__dirname}/build`,
-    publicPath: '/assets/',
-    filename: '[name].bundle.js'
-  } : {
+  output: {
     path: `${__dirname}/dist`,
-    filename: '[name].bundle.[hash].min.js'
+    filename: '[name].bundle.[hash].js'
   },
   plugins: dev ?
   [
       extractCommons,
       extractCSS,
       new webpack.NoEmitOnErrorsPlugin(),
-      new webpack.HotModuleReplacementPlugin()
+      new webpack.HotModuleReplacementPlugin(),
+      new HtmlWebpackPlugin({
+        alwaysWriteToDisk: true,
+        inject: false,
+        template: 'index.ejs',
+        someCustomVariable: 'someCustomVariableValue'
+      }),
+      new HtmlWebpackHarddiskPlugin()
   ]
   : [
       extractCommons,
@@ -64,7 +67,10 @@ module.exports = {
         this.plugin('done', (stats) => {
           fs.writeFileSync(
             path.join(__dirname, './dist', 'manifest.json'),
-            JSON.stringify({ postfix: `.${stats.hash}.min` })
+            JSON.stringify({
+              hash: `${stats.hash}`,
+              timestamp: new Date().toISOString()
+            })
           );
         });
       }
@@ -112,7 +118,7 @@ module.exports = {
       },
       {
         test: /\.(jpeg|jpg|png?)(\?v=\d+\.\d+\.\d+)?/,
-        loader: 'file-loader?name=[path][name].[ext]'
+        loader: 'file-loader?publicPath=../&name=./assets/[path][name].[ext]'
       }
     ]
   },

@@ -1,0 +1,9 @@
+tunnels:
+  frontend:
+    addr: 3001
+    proto: http
+    host_header: localhost
+  backend:
+    addr: 8080
+    proto: http
+    host_header: localhost

@@ -7,10 +7,12 @@
     "test": "NODE_ENV=test ./node_modules/karma/bin/karma start karma.conf.js",
     "build": "(rm -rf ./dist || true) && NODE_ENV=production ./node_modules/.bin/webpack --config webpack.config.js --colors",
     "build:keep": "NODE_ENV=production ./node_modules/.bin/webpack --config webpack.config.js --colors",
-    "watch": "NODE_ENV=development ./node_modules/.bin/webpack-dev-server --content-base build/ --inline --port 3001 --colors --history-api-fallback --open",
+    "watch": "NODE_ENV=development ./node_modules/.bin/webpack-dev-server --content-base build/ --hot --inline --port 3001 --colors --history-api-fallback",
     "coverage": "open ./coverage/html/index.html",
     "mock-server": "NODE_ENV=development node ./mock-server/index.js",
-    "generate-client": "swagger-codegen generate -i ../../swagger.yaml -l javascript -o ./src/js/client --additional-properties usePromises=true"
+    "generate-client": "swagger-codegen generate -i ../swagger.yaml -l javascript -o ./src/js/client --additional-properties usePromises=true",
+    "generate-prop-types": "./node_modules/.bin/swagger-definitions-to-react-proptypes ../swagger.yml ./src/js/definitions/data-prop-types.js",
+    "ngrok": "ngrok start -config ./ngrok.yml"
   },
   "dependencies": {
     "babel-cli": "^6.24.1",
@@ -49,7 +51,10 @@
     "eslint-plugin-import": "^2.3.0",
     "eslint-plugin-jsx-a11y": "^5.0.3",
     "eslint-plugin-react": "^7.1.0",
+    "html-webpack-harddisk-plugin": "^0.1.0",
+    "html-webpack-plugin": "^2.29.0",
     "superagent": "^3.5.2",
+    "swagger-definitions-to-react-proptypes": "^1.2.4",
     "swagger-express-middleware": "^1.0.0-alpha.12"
   }
 }

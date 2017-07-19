@@ -17,32 +17,46 @@ definitions:
   Success:
     type: object
     properties:
-      success:
-        type: boolean
-        enum:
-          - true
+      message:
+        type: string
   Error:
     type: object
     properties:
-      success:
-        type: boolean
-        enum:
-          - false
       message:
         type: string
+    example:
+      message: Something went wrong
   ValidationError:
     type: object
     properties:
       success:
         type: boolean
-        enum:
-          - false
       message:
         type: string
       errors:
-        type: object
-        properties:
-          key:
-            type: string
-        additionalProperties:
-          type: string
+        $ref: '#/definitions/FieldValidationError'
+    example:
+      message: Incorrect data
+      errors:
+        field1: This field is required
+        field2: This field is required
+  FieldValidationError:
+    type: object
+    properties:
+      key:
+        type: string
+    additionalProperties:
+      type: string
+responses:
+  Accepted:
+    description: Request accepted
+    schema:
+      $ref: "#/definitions/Success"
+  BadRequest:
+    description: Request invalid
+    schema:
+      $ref: "#/definitions/ValidationError"
+  ServerError:
+    description: Server error
+    schema:
+      $ref: "#/definitions/Error"

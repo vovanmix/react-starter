@@ -19,7 +19,7 @@
     "object-curly-newline": ["error", {
       "multiline": true
     }],
-    "max-len": ["error", 80],
+    "max-len": ["error", 95],
     "max-params": ["error", 4],
     "indent": ["error", 2, {
       "FunctionDeclaration": {
