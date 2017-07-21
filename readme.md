@@ -43,6 +43,16 @@ yarn build
 yarn test
 ```
 
+### Javascript
+We're using ES-next with babel-preset-stage-2.
+
+https://babeljs.io/docs/plugins/preset-stage-2/
+
+This means that a lot of features (syntax sugar) is available
+that is not yet supported by browsers, but because of Babel it will be transformed to a code that will run on every browser.
+
+Features like `async await` and `arrow functions as class methods` are available.
+
 ### Dev hot reloading
 When running `yarn watch`, after making any changes to js or css source files, changes will be automatically
 reflected in the opened browser window without page reload. That means that if you add
