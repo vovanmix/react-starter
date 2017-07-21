@@ -53,6 +53,15 @@ that is not yet supported by browsers, but because of Babel it will be transform
 
 Features like `async await` and `arrow functions as class methods` are available.
 
+In react, no need to write binding statements like this to preserve `this`:
+```js
+this.handleSubmit = this.handleSubmit.bind(this);
+```
+use arrow functions instead:
+```js
+handleSubmit = (data) => {...};
+```
+
 ### Dev hot reloading
 When running `yarn watch`, after making any changes to js or css source files, changes will be automatically
 reflected in the opened browser window without page reload. That means that if you add
