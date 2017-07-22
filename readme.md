@@ -132,6 +132,9 @@ be executed before react and all the libraries has been loaded. It's a good plac
 to put a custom pre-loading script in vanilla js if necessary. If not needed, the
 references to these files can be removed from the html.
 
+Some newer features, like `array.includes`, are available only in the main app
+by default, and not available in `head.js`. It is possible to make them available in head as well by adding `import "babel-polyfill";` to the `head.js`.
+
 ### Builds
 When building for production, files will be minified and will include unique hashes in their name. One hash per build. A manifest file will be created in `dist`, containing this hash.
 

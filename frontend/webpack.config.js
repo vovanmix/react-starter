@@ -39,6 +39,7 @@ module.exports = {
   devtool: dev ? 'inline-sourcemap' : false,
   entry: {
     app: [
+      'babel-polyfill',
       `${__dirname}/src/styles/app.less`,
       `${__dirname}/src/js/bootstrap.jsx`
     ],
