@@ -1,4 +1,5 @@
 {
+  "parser": "babel-eslint",
   "extends": "airbnb",
   "installedESLint": true,
   "env": {
@@ -6,7 +7,8 @@
     "mocha": true
   },
   "plugins": [
-    "import"
+    "import",
+    "class-property"
   ],
   "rules": {
     "max-lines": ["error", 300],
@@ -43,6 +45,7 @@
       "allow": ["constructors", "setters"]
     }],
     "complexity": ["error", 6],
+    "class-property/class-property-semicolon": ["error", "always"],
     "no-extra-boolean-cast": "off",
     "no-mixed-operators": "off",
     "import/prefer-default-export": "off",
