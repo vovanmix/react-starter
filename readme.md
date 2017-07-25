@@ -68,7 +68,7 @@ reflected in the opened browser window without page reload. That means that if y
 a new background color to the css, it will appear in browser in a couple of seconds, and all previously
 entered data like filled in forms, opened popups, scroll, will be preserved.
 
-The same for JS, new code will come into the effect right away withoud loosing any data.
+The same for JS, new code will come into the effect right away without loosing any data.
 
 ### Bootstrap and font awesome
 Bootstrap and Font Awesome are already installed and included in the main less file.
@@ -82,7 +82,7 @@ files are included there.
 Instead of creating a `<script>` tag and defining variables there, it's preferable to
 define meta tags, put values there, and then access this values in the code.
 
-For the local dev, this values can be set through webpack.
+For the local dev, this values can be set through Webpack.
 
 in Webpack:
 ```js
@@ -145,7 +145,7 @@ Use images like this:
 ```js
 import logoImage from '../../../images/logo.png';
 ```
-There is an option to copy all images to `dist` with this webpack config:
+There is an option to copy all images to `dist` with this Webpack config:
 ```js
 require.context('../images', true, /^.*/);
 ```
@@ -153,8 +153,15 @@ require.context('../images', true, /^.*/);
 ### Swagger client generation
 We will use swagger file to generate a client library that will be used to communicate with the API.
 It will abstract all the details of this communication, like HTTP calls and passing parameters to them.
-The intermediate between the app and the library is `api-service`. It will be available to
-any component using `context`. Anything that should apply to all requests, like headers, should be applied in it.
+The intermediate between the app and the library is `api-provider`. It will be available to a component after adding this:
+
+```js
+import { withApi } from '../../providers/api-provider';
+...
+export default withApi(MyComponent);
+```
+
+If you need something to apply to all requests, like headers, you should add it to `api-provider`.
 
 Please keep `src/js/definitions/services-prop-types.js` file up to date manually, with all the public
 methods of the client library listed there.
@@ -162,7 +169,9 @@ methods of the client library listed there.
 Use it for prop types in components like
 ```js
 import { ApiPropTypes } from '../../definitions/services-prop-types';
-Home.contextTypes = { api: ApiPropTypes };
+class Home extends Component {
+  static propTypes = { api: ApiPropTypes.isRequired };
+}
 ```
 
 One important thing to note is there are no `null` values in swagger. If the field has `null` value,
