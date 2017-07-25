@@ -26,22 +26,15 @@ class ApiProvider extends Component {
     this.api = new DefaultApi(devClient);
   }
 
-  getChildContext() {
-    console.log('initializing api service!');
-    return { api: this.api };
-  }
+  getChildContext = () => ({ api: this.api });
 
-  render() {
-    return Children.only(this.props.children);
-  }
+  render = () => Children.only(this.props.children);
 }
 
 export default ApiProvider;
 
-export const api = (ComponentToWrap) => {
-  const apiComponent = (_, context) =>
-    <ComponentToWrap api={context.api} />;
-
+export const withApi = (ComponentToWrap) => {
+  const apiComponent = (_, { api }) => <ComponentToWrap api={api} />;
   apiComponent.contextTypes = { api: ApiPropTypes.isRequired };
 
   return apiComponent;
