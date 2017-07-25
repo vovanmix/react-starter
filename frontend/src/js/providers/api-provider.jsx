@@ -1,4 +1,5 @@
-import React, { Component, PropTypes, Children } from 'react';
+import React, { Component, Children } from 'react';
+import PropTypes from 'prop-types';
 
 import { ApiClient, DefaultApi } from '../client/src/index';
 // client will be generated with Swagger
@@ -38,8 +39,8 @@ class ApiProvider extends Component {
 export default ApiProvider;
 
 export const api = (ComponentToWrap) => {
-  const apiComponent = () =>
-    <ComponentToWrap {...this.props} api={this.context.api} />;
+  const apiComponent = (_, context) =>
+    <ComponentToWrap api={context.api} />;
 
   apiComponent.contextTypes = { api: ApiPropTypes.isRequired };
 
