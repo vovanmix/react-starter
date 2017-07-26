@@ -62,6 +62,9 @@ use arrow functions instead:
 handleSubmit = (data) => {...};
 ```
 
+### Code style
+Please use Eslint linter for managing a consistent code style. It also helps avoid popular errors and bad practices in JS and in React. The battle tested config is included and it should be very helpful. Eslint is already installed and the only needed part is to install a plugin for the IDE. It should be easy to find. Atom plugin: https://github.com/AtomLinter/linter-eslint
+
 ### Dev hot reloading
 When running `yarn watch`, after making any changes to js or css source files, changes will be automatically
 reflected in the opened browser window without page reload. That means that if you add

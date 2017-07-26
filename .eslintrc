@@ -51,6 +51,7 @@
     "no-empty-function": ["error", {
       "allow": ["constructors", "setters"]
     }],
+    "no-underscore-dangle": ["error", { "allowAfterThis": true }],
     "complexity": ["error", 6],
     "class-property/class-property-semicolon": ["error", "always"],
     "no-extra-boolean-cast": "off",
