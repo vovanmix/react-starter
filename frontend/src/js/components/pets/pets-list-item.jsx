@@ -7,8 +7,10 @@ const PetsListItem = ({ pet }) => (
     <h4>{pet.name}</h4>
     <span className="label label-primary">{pet.tag}</span>
   </div>
-  );
+);
 
-PetsListItem.propTypes = { pet: petPropType.isRequired };
+PetsListItem.propTypes = {
+  pet: petPropType.isRequired
+};
 
 export default PetsListItem;

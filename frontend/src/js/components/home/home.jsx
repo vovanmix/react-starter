@@ -2,15 +2,18 @@ import React from 'react';
 
 import { ApiPropTypes } from '../../definitions/services-prop-types';
 import PetsList from '../pets/pets-list';
+import { withApi } from '../../providers/api-provider';
 
 class Home extends React.Component {
+  static propTypes = { api: ApiPropTypes.isRequired };
+
   constructor(props) {
     super(props);
     this.state = { pets: [] };
   }
 
   componentDidMount() {
-    this.context.api.findPets().then((data) => {
+    this.props.api.findPets().then((data) => {
       this.setState({ pets: data });
     });
   }
@@ -28,6 +31,4 @@ class Home extends React.Component {
   }
 }
 
-Home.contextTypes = { api: ApiPropTypes };
-
-export default Home;
+export default withApi(Home);
